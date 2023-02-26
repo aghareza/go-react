@@ -8,3 +8,7 @@ build-react-app:
 .PHONY: run
 run:
 	@go run cmd/server/main.go
+
+.PHONY: run-web-only
+run-web-only:
+	@cd ui && npm run web-only

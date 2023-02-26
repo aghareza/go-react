@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import { getCount } from "./api/client"
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const getClientCount = async() => {
+    const c = await getCount();
+    setCount(c);
+  }
 
   return (
     <div className="App">
@@ -17,7 +23,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => getClientCount()}>
           count is {count}
         </button>
         <p>
