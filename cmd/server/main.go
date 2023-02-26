@@ -15,7 +15,11 @@ func main() {
 
 	r.Use(static.Serve("/", static.LocalFile("./ui/dist", false)))
 	r.GET("/count", count)
+	r.NoRoute(func(c *gin.Context) {
+		c.File("./ui/dist/index.html")
+	})
 	r.Run(":8000")
+
 }
 
 func count(c *gin.Context) {
