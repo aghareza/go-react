@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/aghareza/go-react/ui"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
-	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,11 +13,9 @@ func main() {
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 
-	r.Use(static.Serve("/", static.LocalFile("./ui/dist", false)))
+	ui.AddRoutes(r)
 	r.GET("/count", count)
-	r.NoRoute(func(c *gin.Context) {
-		c.File("./ui/dist/index.html")
-	})
+
 	r.Run(":8000")
 
 }
